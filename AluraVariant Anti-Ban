@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         Alura Destroyer variante anti ban v1
 // @namespace    http://tampermonkey.net/
-// @version      1.0
+// @version      1.3
 // @description  Script para passar as lições e concluir unidades lentamente, evitando banimento da plataforma
 // @author       AngelHype
 // @match        https://cursos.alura.com.br/*
@@ -24,6 +24,9 @@
     let actualUrl = window.location.href;
     let nextLessonButton = document.getElementsByClassName("bootcamp-next-button")[0];
 
+    // Marca que as lições ainda estão em progresso
+    sessionStorage.setItem('inProgress', 'true');
+
     if (nextLessonButton) {
         let nextLessonLink = nextLessonButton.getAttribute('href');
         let parts = actualUrl.split('/');
@@ -42,35 +45,41 @@
         }).then(data => {
             console.log("[DEBUG] Lição concluída");
 
-            // Aguarda 1,5 segundos antes de avançar para a próxima lição
+            // Define um tempo aleatório entre 0.5s, 1s e 1.5s
+            const delayOptions = [500, 1000, 1500];
+            const randomDelay = delayOptions[Math.floor(Math.random() * delayOptions.length)];
+
+            // Aguarda o tempo aleatório antes de avançar para a próxima lição
             setTimeout(() => {
                 nextLessonButton.click();
                 openNextLessonsInNewTabs();
-            }, 1500); // Timer de 1,5 segundos
+            }, randomDelay);
 
         }).catch(error => {
             console.error("[DEBUG] Falha ao marcar a lição:", error);
         });
 
     } else {
-        // Exibe mensagem quando todas as lições terminam
-        console.log("Todas as lições foram concluídas!");
-        
+        // Se todas as lições foram concluídas
+        if (sessionStorage.getItem('inProgress') === 'true') {
+            console.log("Todas as lições foram concluídas!");
+
+            // Marca que o final das lições foi alcançado
+            sessionStorage.setItem('inProgress', 'false');
+        }
     }
 
     // Função que abre até 3 próximas lições em novas abas
     function openNextLessonsInNewTabs() {
-        // Coleta todos os links das próximas lições na página
         let nextLessonLinks = document.querySelectorAll('.bootcamp-next-button');
 
         if (nextLessonLinks.length > 0) {
-            let openedTabs = 0; // Contador para abas abertas
+            let openedTabs = 0;
 
             nextLessonLinks.forEach((button, index) => {
-                if (openedTabs < 3) { // Limita a abertura a 3 abas
+                if (openedTabs < 3) {
                     let link = button.getAttribute('href');
                     if (link) {
-                        // Abre o link da próxima lição em uma nova aba
                         window.open(link, '_blank');
                         console.log(`[DEBUG] Nova aba aberta para: ${link}`);
                         openedTabs++;
@@ -78,11 +87,9 @@
                 }
             });
         } else {
-            // Exibe mensagem quando todas as lições terminam
             console.log("[DEBUG] Nenhuma próxima lição encontrada.");
-            alert("Créditos a Marcos10PC");
-            alert("Love M🤍");
         }
     }
 
 })();
+
