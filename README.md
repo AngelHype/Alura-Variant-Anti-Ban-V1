@@ -11,7 +11,7 @@ Claro! Aqui estão os links diretos para instalar o Tampermonkey em diferentes n
 ### Como Adicionar um Script no Tampermonkey
 
 1. **Instale o Tampermonkey**:
-   - **[Chrome](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmanafdgjmggdgdgoicmge)** 
+   - **[Chrome](https://chromewebstore.google.com/detail/tampermonkey/dhdgffkkebhmkfjojejmpbldmpobfkfo?hl=pt-BR)** 
    - **[Firefox](https://addons.mozilla.org/pt-BR/firefox/addon/tampermonkey/)** 
    - **[Microsoft Edge](https://microsoftedge.microsoft.com/addons/detail/tampermonkey/ikdkepebmhkgjlmnpokbcgimjfjcficc)**
    - **[Safari](https://apps.apple.com/us/app/tampermonkey/id1482490089)**
