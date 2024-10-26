@@ -6,13 +6,15 @@ Bem vindos à minha **variação de script do alura originalmente feito por **[M
 
 # TUTORIAL VIA TAMPERMONKEY 👻
 
-Claro! Aqui está um tutorial simples para adicionar seu script no Tampermonkey:
+Claro! Aqui estão os links diretos para instalar o Tampermonkey em diferentes navegadores:
 
 ### Como Adicionar um Script no Tampermonkey
 
 1. **Instale o Tampermonkey**:
-   - Vá até a loja de extensões do seu navegador (Chrome, Firefox, etc.) e procure por "Tampermonkey".
-   - Instale a extensão.
+   - **[Chrome](https://chrome.google.com/webstore/detail/tampermonkey/dhdgffkkebhmanafdgjmggdgdgoicmge)** 
+   - **[Firefox](https://addons.mozilla.org/pt-BR/firefox/addon/tampermonkey/)** 
+   - **[Microsoft Edge](https://microsoftedge.microsoft.com/addons/detail/tampermonkey/ikdkepebmhkgjlmnpokbcgimjfjcficc)**
+   - **[Safari](https://apps.apple.com/us/app/tampermonkey/id1482490089)**
 
 2. **Abra o Tampermonkey**:
    - Clique no ícone do Tampermonkey na barra de ferramentas do seu navegador.
