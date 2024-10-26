@@ -1,0 +1,88 @@
+// ==UserScript==
+// @name         Alura Destroyer variante anti ban v1
+// @namespace    http://tampermonkey.net/
+// @version      1.0
+// @description  Script para passar as lições e concluir unidades lentamente, evitando banimento da plataforma
+// @author       AngelHype
+// @match        https://cursos.alura.com.br/*
+// @grant        none
+// ==/UserScript==
+
+(function() {
+    'use strict';
+
+    console.log("--- ALURA DESTROYER VARIANT BY angelhype ---");
+
+    // Modifica texto mostrado a cada lição
+    const waterMark = document.querySelector('.formattedText');
+    if (waterMark) {
+        waterMark.innerHTML = 'Alura destroyer by Angelhype';
+    }
+
+    // Obtém cookies e URL
+    let cookies = document.cookie;
+    let actualUrl = window.location.href;
+    let nextLessonButton = document.getElementsByClassName("bootcamp-next-button")[0];
+
+    if (nextLessonButton) {
+        let nextLessonLink = nextLessonButton.getAttribute('href');
+        let parts = actualUrl.split('/');
+        let lessonName = parts[4];
+        let lessonId = parts[6];
+        console.log(`[DEBUG] Lesson_Name: ${lessonName} Lesson_Id: ${lessonId}`);
+
+        // Marcação da lição como concluída
+        fetch(`https://cursos.alura.com.br/course/${lessonName}/task/${lessonId}/mark-video`, {
+            method: 'POST',
+            credentials: 'include',
+            headers: {
+                'Content-Type': 'application/json',
+                'Cookie': cookies
+            }
+        }).then(data => {
+            console.log("[DEBUG] Lição concluída");
+
+            // Aguarda 1,5 segundos antes de avançar para a próxima lição
+            setTimeout(() => {
+                nextLessonButton.click();
+                openNextLessonsInNewTabs();
+            }, 1500); // Timer de 1,5 segundos
+
+        }).catch(error => {
+            console.error("[DEBUG] Falha ao marcar a lição:", error);
+        });
+
+    } else {
+        // Exibe mensagem quando todas as lições terminam
+        console.log("Todas as lições foram concluídas!");
+        
+    }
+
+    // Função que abre até 3 próximas lições em novas abas
+    function openNextLessonsInNewTabs() {
+        // Coleta todos os links das próximas lições na página
+        let nextLessonLinks = document.querySelectorAll('.bootcamp-next-button');
+
+        if (nextLessonLinks.length > 0) {
+            let openedTabs = 0; // Contador para abas abertas
+
+            nextLessonLinks.forEach((button, index) => {
+                if (openedTabs < 3) { // Limita a abertura a 3 abas
+                    let link = button.getAttribute('href');
+                    if (link) {
+                        // Abre o link da próxima lição em uma nova aba
+                        window.open(link, '_blank');
+                        console.log(`[DEBUG] Nova aba aberta para: ${link}`);
+                        openedTabs++;
+                    }
+                }
+            });
+        } else {
+            // Exibe mensagem quando todas as lições terminam
+            console.log("[DEBUG] Nenhuma próxima lição encontrada.");
+            alert("Créditos a Marcos10PC");
+            alert("Love M🤍");
+        }
+    }
+
+})();
