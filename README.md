@@ -2,6 +2,8 @@
 
 Bem vindos à minha **variação de script do alura originalmente feito por **[Marcos10pc](https://github.com/marcos10pc)**,** ele tem o intuito de ser anti-banimento da plataforma, deixando a passagem de lições mais lenta! Você pode abrir mais abas se prefirir, **porém por sua conta em risco!**
 
+
+
 # TUTORIAL VIA TAMPERMONKEY 👻
 
 Claro! Aqui está um tutorial simples para adicionar seu script no Tampermonkey:
